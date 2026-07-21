@@ -105,7 +105,7 @@ class AccountRegistry:
     def __init__(self):
         self.number = {}
         self.order = []
-    def add(self.,acc):
+    def add(self,acc):
         self.number[acc.account_no] = acc
         self.order.append(acc.account_no)
         return acc
