@@ -1,6 +1,5 @@
 
 
-
 class BankConfig:
     _instance = None
     def __new__(cls):
@@ -82,23 +81,42 @@ class AccountFactory:
         raise ValueError(f"Unknown type: {kind}")    
 
 
+
+
+
+
+
+accs1 = AccountFactory.create("savings", "Almaz", "CBE-1", 1500  )
+accs1.add_interest()
+print(accs1.statement)
+
+print('=--------------------------------------')
+
+accs2 = AccountFactory.create("current", "Almaz", "CBE-1", 1500 )
+accs2.withdraw(200)
+print(accs2.statement)
+
+
+
+
+
+
 class AccountRegistry:
     def __init__(self):
         self.number = {}
         self.order = []
-
-    def add(self,acc):
+    def add(self.,acc):
         self.number[acc.account_no] = acc
         self.order.append(acc.account_no)
         return acc
-    def find(self, number):
+    def find(self,number):
         account = self.number.get(number)
         if account is None:
-            raise ValueError(f"Account {number} not found")
+            raise ValueError("account not found")
         return account
     def list_all(self):
         return [self.number[n] for n in self.order]
-  
+
 
 
 
@@ -119,7 +137,7 @@ accs2.withdraw(200)
     
 
 registry = AccountRegistry()
-registry.add(AccountFactory.create("savings", "Almaz", "CBE-1", 1500))
+registry.add(AccountFactory.create("savings", "alador", "CBE-1", 1500))
 acc = registry.find("CBE-1")
 
 
