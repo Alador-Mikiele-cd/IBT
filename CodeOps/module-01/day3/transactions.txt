@@ -1,0 +1,5 @@
+abel,300
+alador,5000
+sase,1000
+seble,50
+shewit,10000

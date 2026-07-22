@@ -1,0 +1,5 @@
+shewit: 10000.0
+alador: 5000.0
+sase: 1000.0
+abel: 300.0
+seble: 50.0
