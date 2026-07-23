@@ -12,22 +12,31 @@ class BankConfig:
 
 
 
-
 class Account:
     def __init__(self,owner,account_no,bal):
         self.owner = owner
         self.account_no = account_no
         self._bal = bal
-    
+        self.observer = []
+    def subscribe(self,observer):
+        self.observer.append(observer)
+    def _notify(self,message):
+        for observer in self.observer:
+            observer.update(message)
+
     def deposit(self,amount):
         if amount  <= 0:
             raise ValueError("amount must be positive")
         self._bal += amount
+        self._notify(f"{self.owner} deposited {amount}")
         return f' you have deposited {amount} '
     def withdraw(self,amount):
         if amount  >= self._bal:
             raise ValueError("amount must be less then you balnace")
         self._bal -= amount
+        self._notify(
+            f"{self.owner} withdrew {amount}"
+        )
         return f' you have withdraw {amount} '
     @property
     def statement(self):
@@ -44,6 +53,9 @@ class SavingsAccount(Account):
     def add_interest(self):
         interest = self._bal * self.rate
         self._bal += interest
+        self._notify(
+        f"{self.owner} received {interest} interest"
+    )
     @property
     def statement(self):
         return ( f"Account Type:Saving Account\n"
@@ -61,6 +73,9 @@ class CurrentAccount(Account):
         if amount  > self._bal + self.over:
             raise ValueError("amount must be less then you balnace")
         self._bal -= amount
+        self._notify(
+            f"{self.owner} withdrew {amount}"
+        )
         return f' you have withdraw {amount} ' 
     @property
     def statement(self):
@@ -69,6 +84,14 @@ class CurrentAccount(Account):
             f"Account No: {self.account_no}\n"
             f"Balance: {self._bal}")   
 
+class SMSAlert:
+    def update(self, message):
+        print(f"SMS ALERT: {message}")
+
+
+class AuditLog:
+    def update(self, message):
+        print(f"AUDIT LOG: {message}")
 
 
 class AccountFactory:
@@ -97,6 +120,17 @@ accs2.withdraw(200)
 print(accs2.statement)
 
 
+sms = SMSAlert()
+log = AuditLog()
+
+
+accs1.subscribe(sms)
+accs1.subscribe(log)
+
+
+accs1.deposit(500)
+accs1.withdraw(200)
+
 
 
 
@@ -122,13 +156,13 @@ class AccountRegistry:
 
 accs1 = AccountFactory.create("savings", "Almaz", "CBE-1", 1500  )
 accs1.add_interest()
-# print(accs1.statement)
+print(accs1.statement)
 
 print('=--------------------------------------')
 
 accs2 = AccountFactory.create("current", "Almaz", "CBE-1", 1500 )
 accs2.withdraw(200)
-# print(accs2.statement)
+print(accs2.statement)
 
 
 

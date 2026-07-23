@@ -1,11 +1,4 @@
 
-
-
-
-
-
-
-
 class Account:
     def __init__(self,owner,account_no,bal):
         self.owner = owner

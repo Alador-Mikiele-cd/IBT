@@ -49,6 +49,9 @@ class SavingsAccount(Account):
     def add_interest(self):
         interest = self._bal * self.rate
         self._bal += interest
+        self._notify(
+        f"{self.owner} received {interest} interest"
+    )
     @property
     def statement(self):
         return ( f"Account Type:Saving Account\n"
@@ -66,6 +69,9 @@ class CurrentAccount(Account):
         if amount  > self._bal + self.over:
             raise ValueError("amount must be less then you balnace")
         self._bal -= amount
+        self._notify(
+            f"{self.owner} withdrew {amount}"
+        )
         return f' you have withdraw {amount} ' 
     @property
     def statement(self):
