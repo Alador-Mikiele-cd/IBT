@@ -1,65 +1,45 @@
-x = 5
-sum = 1
-while 1 <= x:
-    sum *= x 
-   
-    x -= 1
+list = [1,2,4,5,6]
 
-print(sum)
+# print(list[5]) this is O(1) because it finds it by memorey
 
-a = 'a'
-c = 'a'
-print(a is c)
+for number in list:
+    print(number)
+# O(n) The loop runs once for every item in the list
+# If there are n items, there are n operations
 
+for i in list:
+    for j in list:
+        print( i , j)
 
-def linear_search(list , target):
-    for i,x in enumerate(list):
-        print(f'{i} => {x}')
-        if x == target:
-            return f' it is on{i}'
-    return 'not found'
+# O(n^2) it loops n * n
 
-# print(linear_search(list , 12))
+students = {
+    "alador":18,
+    "bereket":20
+}
 
-
+print(students["alador"])
+ # O(n) it just go to alador directly without going throue every items
 
 
+def binary_search(items, target):
+    left = 0
+    right = len(items) - 1
 
+    while left <= right:
+        mid = (left + right) // 2
 
+        if items[mid] == target:
+            return mid
+        elif items[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
 
+    return -1
 
+numbers = [10, 20, 30, 40, 50, 60]
 
-class Bankconfig:
-    _instance = None
-    def __new__(cls):
-        if cls._instance is None:
-            cls._instance = super().__new__(cls)
-            cls._instance.interest_rate = 0.05
-            cls._instance.overdraft_limit = 1000
-        return cls._instance
-    
-x = Bankconfig()
-print(x)
-y =  Bankconfig()
-print(y == x)
-        
+print(binary_search(numbers, 40))
 
-class Animal:
-    def __init__(self,sound,name):
-        self.sound = sound
-    def speak(self):
-        return f'{self.sound}'
-    
-class dog(Animal):
-    def __init__(self, sound,bav):
-        super().__init__(sound)
-        self.bav = bav
-
-    def how(self):
-        return self.bav
-
-dog = dog("wooo",'loyal')
-
-print(dog.speak())
-print(dog.how())
-print(dog.sound)
+# O(log n) each step cuts the search space in half
