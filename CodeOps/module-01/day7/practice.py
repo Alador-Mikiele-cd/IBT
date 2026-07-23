@@ -27,25 +27,6 @@ def linear_search(list , target):
 
 
 
-def binary_search(list , target):
-    left = 0
-    right = len(list) - 1
-    while left <= right:
-        mid = (left + right) // 2
-        if list[mid] == target:
-            return mid
-        elif target > list[mid]:
-             right = mid + 1
-             
-        elif target < list[mid]:
-            left = mid - 1
-        else:
-             return 'not found'
-            
-            
-   
-list = [1,3,5,2,12] 
-print(binary_search(list , 1))
 
 
 class Bankconfig:

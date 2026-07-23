@@ -8,3 +8,37 @@ names = ['alador','abel','sami']
 
 for i in names:
     print(f' {names} pay {share}')
+
+temperature = float(input('Enter the temperature in °C: '))
+
+if temperature < 15:
+    print('cold')
+elif temperature <= 28:
+    print('warm')
+else:
+    print('hot')
+
+
+for i in range(1,11):
+    # print(f'receipt {i}')
+    pass
+
+
+for i in range(1,21):
+    if i % 2 == 0:
+        # print(i)
+        pass
+
+
+def discount(price , percent = 10):
+    return price - (price * percent/100)
+
+# print(discount(10000000))
+
+
+count = 5
+
+while count >= 1:
+    print(count)
+    count -= 1
+
